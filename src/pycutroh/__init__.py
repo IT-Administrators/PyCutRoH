@@ -16,6 +16,7 @@ License: MIT
 
 """
 
+# ---------- Helper functions ----------
 # Helper function for position handling.
 # Normally arrays start counting by 0. This function makes them start by 1.
 def pos_handling(pos: int):
@@ -59,6 +60,35 @@ def replace_separator(content: str, sep: str, newsep: str):
     elif newsep and sep in content:
         return str(content).replace(sep, newsep)
 
+def calc_separator_pos(content: str, sep:str):
+    """Calculates the positions of the specified separator in the specified string."""
+    # Initialising the separator list by adding 0 and contentlength.
+    # This must be done to calculate the right amount of fields.
+    seppos = [0, len(content)]
+
+    # Iterating over content an adding the separator postions to the list.
+    for chr in range(len(content)):
+        if content[chr] == sep:
+            seppos.append(chr)
+    # Sorting the list for the field calculation.
+    # If the list isn"t sorted the field calculation goes wrong because of wrong field limitations.
+    sortedseppos = sorted(seppos)
+    return sortedseppos
+
+def calc_fields(fields: tuple, seppos: list):
+    """Calculate the fields in the specified string."""
+    fieldstart = 0
+    fieldlist = []
+    # Iterating over the specified fieldlist.
+    # Setting new fieldstart, to start at the separator position +1.
+    # Than adding the field parameters (fieldstart, fieldlength) to the fieldlist. 
+    for field in fields:
+        fieldstart = seppos[field]
+        if field in range(len(seppos)):
+            fieldlist.append((fieldstart, seppos[field + 1] - seppos[field]))
+    return fieldlist
+
+# ---------- Main functions ----------
 # Get letter on position.
 def get_letter_on_pos(content: str, pos: int):
     """Get the letter on the specified position."""
@@ -84,29 +114,9 @@ def get_fields(content: str, fields: tuple, sep: int):
     separator as the field limitations. 
     Than join the retrieved fields using the specified separator.
     """
-    # Initialising the separator list by adding 0 and contentlength.
-    # This must be done to calculate the right amount of fields.
-    seppos = [0, len(content)]
-
-    # Iterating over content an adding the separator postions to the list.
-    for chr in range(len(content)):
-        if content[chr] == sep:
-            seppos.append(chr)
-    # Sorting the list for the field calculation.
-    # If the list isn"t sorted the field calculation goes wrong because of wrong field limitations.
-    sortedseppos = sorted(seppos)
-    # Initialising the fildstart with 0, because every calculation has to start with content[0].
-    fieldstart = 0
-    fieldlist = []
-    # Iterating over the specified fieldlist.
-    # Setting new fieldstart, to start at the separator position +1.
-    # Than adding the field parameters (fieldstart, fieldlength) to the fieldlist. 
-    for field in fields:
-        fieldstart = sortedseppos[field]
-        if field in range(len(seppos)):
-            fieldlist.append((fieldstart, sortedseppos[field + 1] - sortedseppos[field]))
-
     newstringlst = []
+    seppos = calc_separator_pos(content,sep)
+    fieldlist = calc_fields(fields,seppos)
     # Creating the new string, by adding the content from the fieldstart position
     # to with the fieldlength.
     for f in fieldlist:
