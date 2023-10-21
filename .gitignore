@@ -1,3 +1,5 @@
 env
 dist
 .vscode*
+__pycache__*
+pycutroh.egg*
