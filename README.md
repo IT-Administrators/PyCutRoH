@@ -120,7 +120,22 @@ To show the help run the following command:
 ```python
 python -m pycutroh -h
 ```
-![CliHelpCommand](images/image-1.png)
+Result:
+```
+usage: __main__.py [-h] [-s STRING] [-glop GETLETTERONPOS | -glbp GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS] {f} ...
+
+positional arguments:
+  {f}                   Get fields separated by specified delimiter.
+    f                   Get fields by delimiter and join using same delimiter.
+
+options:
+  -h, --help            show this help message and exit
+  -s STRING, --string STRING
+  -glop GETLETTERONPOS, --getLetterOnPos GETLETTERONPOS
+                        Letter on position to return.
+  -glbp GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS, --getLettersFromPosToPos GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS
+                        Get letter between positions.
+```
 
 Using a function:
 
