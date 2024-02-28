@@ -101,7 +101,7 @@ def get_letter_on_pos(content: str, pos: int):
 def get_letters_from_pos_to_pos(content: str, pos: tuple):
     """Get letters between the specified positions."""
     # Gets only the letters from pos to position.
-    # If there is no postion specified after the :
+    # If there is no position specified after the :
     # the string is returned from the starting position until the end. 
     newstr = content[pos[0]:pos[1]]
     return newstr

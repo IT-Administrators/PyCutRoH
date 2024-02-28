@@ -44,6 +44,9 @@ class TestPycutrohMainFunctions(unittest.TestCase):
 
     def test_get_letters_from_pos_to_pos(self):
         self.assertEqual(pycutroh.get_letters_from_pos_to_pos(self.content, (0, 25)), self.content[0:25])
+        self.assertEqual(pycutroh.get_letters_from_pos_to_pos(self.content, (0, 9)), self.content[0:9])
+        self.assertEqual(pycutroh.get_letters_from_pos_to_pos(self.content, (0, 10)), self.content[0:10])
+        self.assertEqual(pycutroh.get_letters_from_pos_to_pos(self.content, (0, 20)), self.content[0:20])
 
     def test_get_fields(self):
         self.assertEqual(pycutroh.get_fields(self.content, (0, 3), " "),"This demonstration")
@@ -52,6 +55,7 @@ class TestPycutrohMainFunctions(unittest.TestCase):
     def test_get_fields_new_separator(self):
         self.assertEqual(pycutroh.get_fields_new_separator(self.content, (0, 3), " ", "|"),"This|demonstration")
         self.assertEqual(pycutroh.get_fields_new_separator(self.content,(0,3,1,2,4)," ","|"),"This|demonstration|is|a|string.")
+        # self.assertEqual(pycutroh.get_fields_new_separator(self.content,(0,)," ","|"),"This|")
 
 if __name__ == '__main__':
     # Verbose unittests.
