@@ -11,6 +11,7 @@ _The pycutroh module is a simple string cutting module._
 3. [How to use](#how-to-use)
     1. [How to import](#how-to-import)
     2. [Using the module](#using-the-module)
+    3. [Using the cli](#using-the-cli)
 4. [License](/LICENSE)
 
 ## Introduction
@@ -21,7 +22,7 @@ This module is inspired by the linux bash command.
 
 At the moment this module provides four functions, which can be used to manipulate strings. For further information see here: [How to use](#how-to-use)
 
-The cli interface for this module only shows help at the moment and will be further expanded, as well as the package functionality itself.
+The cli interface for this module is now available. 
 
 ## Getting started
 
@@ -109,6 +110,29 @@ Result:
 ```
 This|demonstration
 ```
+
+### Using the cli
+
+You can now use the cli of the pycutroh module. This cli is my first using the argparse module, so there might be adjustments in the future.
+
+To show the help run the following command:
+
+```python
+python -m pycutroh -h
+```
+![CliHelpCommand](images\image-1.png)
+
+Using a function:
+
+```python
+python -m pycutroh f --getFields (0,1,2,3) --delimiter " " --newDelimiter ","
+```
+
+Result:
+```
+This,is,a,demonstration
+```
+
 ## License
 
 [MIT](/LICENSE)
