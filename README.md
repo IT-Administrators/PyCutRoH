@@ -120,7 +120,7 @@ To show the help run the following command:
 ```python
 python -m pycutroh -h
 ```
-![CliHelpCommand](images\image-1.png)
+![CliHelpCommand](images/image-1.png)
 
 Using a function:
 
