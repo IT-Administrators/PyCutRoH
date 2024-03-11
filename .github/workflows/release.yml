@@ -1,4 +1,4 @@
-name: Publish Python distribution to PyPI
+name: Publish PyPi
 
 on: [push, pull_request]
 

@@ -1,3 +1,7 @@
+![PyPI - Version](https://img.shields.io/pypi/v/pycutroh)
+![PyPI - License](https://img.shields.io/pypi/l/pycutroh)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pycutroh)
+
 # pycutroh
 
 _The pycutroh module is a simple string cutting module._
@@ -12,7 +16,8 @@ _The pycutroh module is a simple string cutting module._
     1. [How to import](#how-to-import)
     2. [Using the module](#using-the-module)
     3. [Using the cli](#using-the-cli)
-4. [License](/LICENSE)
+4. [Releasing](#releasing)
+5. [License](/LICENSE)
 
 ## Introduction
 
@@ -146,6 +151,23 @@ python -m pycutroh f --getFields (0,1,2,3) --delimiter " " --newDelimiter ","
 Result:
 ```
 This,is,a,demonstration
+```
+
+## Releasing
+
+Releases are published automatically when a tag is pushed to GitHub.
+
+```Powershell
+# Create release variable.
+$Release = "x.x.x"
+# Create commit.
+git commit --allow-empty -m "Release $Release"
+# Create tag.
+git tag -a $Release -m "Version $Release"
+# Push from original.
+git push origin --tags
+# Push from fork.
+ git push upstream --tags
 ```
 
 ## License
