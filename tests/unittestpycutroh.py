@@ -55,7 +55,7 @@ class TestPycutrohMainFunctions(unittest.TestCase):
     def test_get_fields_new_separator(self):
         self.assertEqual(pycutroh.get_fields_new_separator(self.content, (0, 3), " ", "|"),"This|demonstration")
         self.assertEqual(pycutroh.get_fields_new_separator(self.content,(0,3,1,2,4)," ","|"),"This|demonstration|is|a|string.")
-        # Specifiying just one filed is currently not supported. 
+        # Specifiying just one field is currently not supported. 
         # self.assertEqual(pycutroh.get_fields_new_separator(self.content,(0,)," ","|"),"This|")
 
 if __name__ == '__main__':
