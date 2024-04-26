@@ -1,8 +1,0 @@
-Add:
-- Add regex cutting
-	- Cut regex out of the string
-- Add regex cutting with fields old delimiter
-	- Cut regex out ouf every field and append using old delimiter
-- Add regex cutting with fields new delimiter
-Change:
-Remove:
