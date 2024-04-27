@@ -2,6 +2,7 @@
 ![PyPI - License](https://img.shields.io/pypi/l/pycutroh)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pycutroh)
 [![Publish PyPi](https://github.com/IT-Administrators/pycutroh/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/IT-Administrators/pycutroh/actions/workflows/release.yml)
+[![CI](https://github.com/IT-Administrators/pycutroh/actions/workflows/ci.yaml/badge.svg)](https://github.com/IT-Administrators/pycutroh/actions/workflows/ci.yaml)
 
 # pycutroh
 
