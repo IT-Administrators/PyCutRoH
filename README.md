@@ -169,7 +169,7 @@ git tag -a $Release -m "Version $Release"
 # Push from original.
 git push origin --tags
 # Push from fork.
- git push upstream --tags
+git push upstream --tags
 ```
 
 ## License
