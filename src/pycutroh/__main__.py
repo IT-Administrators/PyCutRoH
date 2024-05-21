@@ -13,6 +13,9 @@ def main():
     # If using default = 0, the mutally exclusive group is not working.
     group1.add_argument('-glop', '--getLetterOnPos', type=int, help=("Letter on position to return."))
     group1.add_argument('-glbp', '--getLettersFromPosToPos', type=tuple, help=("Get letter between positions."), nargs=2)
+    group1.add_argument('-glbfs', '--getLettersBeforeSign', type=str, help=("Get letters Before specified sign."))
+    group1.add_argument('-glas', '--getLettersAfterSign', type=str, help=("Get letters after specified sign."))
+    group1.add_argument('-glbs', '--getLettersBetweenSigns', type=tuple, help=("Get letters between specified signs.") , nargs=2)
     
     # Create subparser.
     fieldparser = parser.add_subparsers(dest='fields', help=("Get fields separated by specified delimiter."))
@@ -35,6 +38,12 @@ def main():
         # res = (0,25)
         res = [int(' '.join(tups).replace(' ','')) for tups in args.getLettersFromPosToPos]
         print(get_letters_from_pos_to_pos(args.string, res))
+    elif args.getLettersBeforeSign:
+        print(get_letters_before_sign(args.string, args.getLettersBeforeSign))
+    elif args.getLettersAfterSign:
+        print(get_letters_after_sign(args.string, args.getLettersAfterSign))
+    elif args.getLettersBetweenSigns:
+        print(get_letters_between_signs(args.string, args.getLettersBetweenSigns[0][0], args.getLettersBetweenSigns[1][0]))
     elif args.fields:
         # # Create tuple from list of tuples.
         fieldtup = [int(' '.join(tups).replace(' ','')) for tups in args.getFields]

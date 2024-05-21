@@ -129,7 +129,7 @@ python -m pycutroh -h
 ```
 Result:
 ```
-usage: __main__.py [-h] [-s STRING] [-glop GETLETTERONPOS | -glbp GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS] {f} ...
+usage: __main__.py [-h] [-s STRING] [-glop GETLETTERONPOS | -glbp GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS | -glbfs GETLETTERSBEFORESIGN | -glas GETLETTERSAFTERSIGN | -glbs GETLETTERSBETWEENSIGNS GETLETTERSBETWEENSIGNS] {f} ...
 
 positional arguments:
   {f}                   Get fields separated by specified delimiter.
@@ -142,6 +142,12 @@ options:
                         Letter on position to return.
   -glbp GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS, --getLettersFromPosToPos GETLETTERSFROMPOSTOPOS GETLETTERSFROMPOSTOPOS
                         Get letter between positions.
+  -glbfs GETLETTERSBEFORESIGN, --getLettersBeforeSign GETLETTERSBEFORESIGN
+                        Get letters Before specified sign.
+  -glas GETLETTERSAFTERSIGN, --getLettersAfterSign GETLETTERSAFTERSIGN
+                        Get letters after specified sign.
+  -glbs GETLETTERSBETWEENSIGNS GETLETTERSBETWEENSIGNS, --getLettersBetweenSigns GETLETTERSBETWEENSIGNS GETLETTERSBETWEENSIGNS
+                        Get letters between specified signs.
 ```
 
 Using a function:
