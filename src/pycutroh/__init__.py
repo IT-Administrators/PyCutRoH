@@ -16,8 +16,6 @@ License: MIT
 
 """
 
-import re
-
 # ---------- Helper functions ----------
 # Helper function for position handling.
 # Normally arrays start counting by 0. This function makes them start by 1.
