@@ -16,10 +16,12 @@ License: MIT
 
 """
 
+import re
+
 # ---------- Helper functions ----------
 # Helper function for position handling.
 # Normally arrays start counting by 0. This function makes them start by 1.
-def pos_handling(pos: int):
+def _pos_handling(pos: int):
     """If used it starts counting by 1. Default is 0."""
     newpos = pos - 1
     if newpos < 0:
@@ -27,7 +29,7 @@ def pos_handling(pos: int):
     return newpos
 
 # Removes the leading separator if it exists.
-def remove_leading_separator(content: str, sep: str):
+def _remove_leading_separator(content: str, sep: str):
     """Removes the leading separator, if it exists."""
     if content.startswith(sep):
         newstr = content[1:]
@@ -36,7 +38,7 @@ def remove_leading_separator(content: str, sep: str):
         return content
 
 # Replaces the specified separator with a new one. 
-def replace_separator(content: str, sep: str, newsep: str):
+def _replace_separator(content: str, sep: str, newsep: str):
     """Replaces all separators with a new one.
     
     This is a helper function for the get_fields_new_separator function. 
@@ -60,7 +62,7 @@ def replace_separator(content: str, sep: str, newsep: str):
     elif newsep and sep in content:
         return str(content).replace(sep, newsep)
 
-def calc_separator_pos(content: str, sep:str):
+def _calc_separator_pos(content: str, sep:str):
     """Calculates the positions of the specified separator in the specified string."""
     # Initialising the separator list by adding 0 and contentlength.
     # This must be done to calculate the right amount of fields.
@@ -75,7 +77,7 @@ def calc_separator_pos(content: str, sep:str):
     sortedseppos = sorted(seppos)
     return sortedseppos
 
-def calc_fields(fields: tuple, seppos: list):
+def _calc_fields(fields: tuple, seppos: list):
     """Calculate the fields in the specified string."""
     fieldstart = 0
     fieldlist = []
@@ -115,14 +117,14 @@ def get_fields(content: str, fields: tuple, sep: int):
     Than join the retrieved fields using the specified separator.
     """
     newstringlst = []
-    seppos = calc_separator_pos(content,sep)
-    fieldlist = calc_fields(fields,seppos)
+    seppos = _calc_separator_pos(content,sep)
+    fieldlist = _calc_fields(fields,seppos)
     # Creating the new string, by adding the content from the fieldstart position
     # to with the fieldlength.
     for f in fieldlist:
         newstringlst.append(content[f[0]:(f[0] + f[1])])
     # Returning the list as a string, by joining all elements together. 
-    return remove_leading_separator(str().join(newstringlst), sep)
+    return _remove_leading_separator(str().join(newstringlst), sep)
 
 # Get content of the specified fields and join them to a new string, with a new separator.
 def get_fields_new_separator(content: str, fields: tuple, sep: str, newsep: str):
@@ -133,8 +135,71 @@ def get_fields_new_separator(content: str, fields: tuple, sep: str, newsep: str)
     Than join the retrieved fields using the new separator.
     """
     newstr = get_fields(content, fields, sep)
-    return replace_separator(newstr, sep, newsep)
+    return _replace_separator(newstr, sep, newsep)
 
+def get_letters_before_sign(content: str, sign:str):
+    """Get all letters until the first appearance of sign."""
+    singpos = content.find(sign)
+    return content[:singpos]
 
+def get_letters_after_sign(content: str, sign:str):
+    """Get all letters after the first appearence of sign until end of line.
+
+    Only single character signs are allowed.
+    
+    For example:
+
+    Input:
+        string = "This;is;a;Test!"
+
+        sign = ";"
+
+    Result:
+        "is;a;Test!"
+
+    """
+    # Check if only single character signs are specified.
+    if len(sign) == 1:
+        signpos = content.find(sign)
+        return content[signpos +1:]
+    else:
+        raise ValueError("Only single character sings are allowed.")
+
+def get_letters_between_signs(content: str, startsign:str, endsign:str):
+    """Get all letters between the specified signs.
+
+    Only single signs can be specified at the moment.
+
+    The startsign and endsign are not included in the result string.
+    
+    If startsign and endsign are not equal, the first appearance of the signs,
+    is taken to retrieve the letters.
+
+    """
+    # Check if only single character signs are specified.
+    if len(startsign) == 1 and len(endsign) == 1:
+        # Check if both signs are equal, this must be handled differently.
+        if startsign != endsign:
+            startsignpos = content.find(startsign)
+            endsignpos = content.find(endsign)
+
+            return content[startsignpos +1 : endsignpos]
+        else:
+            startsignpos = []
+            # Get all appearances of startsign.
+            for i in range(len(content)):
+                if content[i] == startsign:
+                    startsignpos.append(i)
+            # If sign only appeares once, set endsignpos to end of string.
+            # Otherwise endsingpos is second appearance of sign.
+            if len(startsignpos) == 1:
+                endsignpos = len(startsign)
+            else:
+                endsignpos = startsignpos[1]
+
+            return content[startsignpos[0] +1 : endsignpos]
+    else:
+        raise ValueError("Only single character signs are allowed.")
+    
 # Functions that are imported by calling from <modulename> import *
-__all__ = ["get_letter_on_pos", "get_letters_from_pos_to_pos", "get_fields", "get_fields_new_separator"]
+__all__ = ["get_letter_on_pos", "get_letters_from_pos_to_pos", "get_fields", "get_fields_new_separator","get_letters_before_sign","get_letters_after_sign","get_letters_between_signs"]
